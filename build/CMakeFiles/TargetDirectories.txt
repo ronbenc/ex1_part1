@@ -1,0 +1,3 @@
+C:/home/ronbenc/projects/HW1/part1/build/CMakeFiles/map.dir
+C:/home/ronbenc/projects/HW1/part1/build/CMakeFiles/edit_cache.dir
+C:/home/ronbenc/projects/HW1/part1/build/CMakeFiles/rebuild_cache.dir

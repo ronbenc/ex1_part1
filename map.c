@@ -3,11 +3,17 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-struct Map_t
+typedef struct node
 {
     char* key;
     char* value;
-    struct Map_t* next;
+    struct node* next;
+} *Node;
+
+struct Map_t
+{
+    Node head;
+    Node current;
 };
 
 static char* copyString(const char* str)
@@ -25,24 +31,17 @@ Map mapCreate()
         return NULL;
     }
 
-    map->next = NULL;
+    map->head = NULL;
+    map->current = NULL;
+
     return map;
 }
 
-void mapDestroy(Map map) //recursive
+void mapDestroy(Map map)
 {
-    Map nexDestroy = map->next;
-    free(map); //first node is unpopulated so no need to free key and value
-    for(map = map->next; map; map = map->next)
-    {
-        map = nexDestroy;
-        free(map->key);
-        free(map->value);
-        nexDestroy = map->next;
-    }
-    
+    mapClear(map);
+    free(map);
 }
-
 
 Map mapCopy(Map map);
 int mapGetSize(Map map);
@@ -70,7 +69,8 @@ MapResult mapPut(Map map, const char* key, const char* data)
     }
     */
     // key doesn't exist in list. we will add it to the head
-    Map new_node = mapCreate(); //create new node
+    Node new_node = malloc(sizeof(struct node)); //create new node
+
     if(!new_node)
     {
         return MAP_OUT_OF_MEMORY;
@@ -83,23 +83,23 @@ MapResult mapPut(Map map, const char* key, const char* data)
     // populate the current head node and insert an unpopulated node in the head of the list.
     new_node->key = newKey;
     new_node->value = newValue;
-    new_node->next = map->next;
-    map->next = new_node;
+    new_node->next = map->head;
+    map->head = new_node;
 
     return MAP_SUCCESS;
 }
 
 char* mapGet(Map map, const char* key)
 {
-    if(!key)
+    if(!map || !key)
         return NULL; 
 
-    for(map = map->next; map && strcmp(key, map->key); map = map->next);
-
-    if(map)
+    MAP_FOREACH(key_iterator, map)
     {
-        assert(map->value);
-        return map->value;
+        if(strcmp(key_iterator, key)==0)
+        {
+            return map->current->value;
+        }       
     }
 
     return NULL;   
@@ -109,28 +109,49 @@ MapResult mapRemove(Map map, const char* key);
 
 char* mapGetFirst(Map map)
 {
-    if(!map || !(map->next))
+    if(!map || !(map->head))
         return NULL;
 
-    // skip the dummy node pointed by map
-    return map->next->key;
+    // update current for the iterator
+    map->current = map->head;
+
+    return map->head->key;
 }
 
 char* mapGetNext(Map map)
 {
-    return mapGetFirst(map);
+    if(!map || !(map->current) || !(map->current->next))
+        return NULL;
+
+    // update current for the iterator
+    map->current = map->current->next;
+ 
+    return map->current->key;
 }
 
-MapResult mapClear(Map map);
+MapResult mapClear(Map map)
+{
+    if(!map)
+        return MAP_NULL_ARGUMENT;
+
+    while(map->head)
+    {
+        Node tmp = map->head->next;
+        free(map->head->key);
+        free(map->head->value);
+        free(map->head);
+        map->head = tmp;
+    }
+
+    map->current = NULL;
+
+    return MAP_SUCCESS;
+}
 
 void tmpMapPrint(Map map)
 {
     MAP_FOREACH(key_iterator, map)
     {
-        char* currValue = mapGet(map, key_iterator);
-
-        printf("%s, %s\n", key_iterator, currValue);
-        // printf("%s\n", key_iterator);
+        printf("%s, %s\n", key_iterator, map->current->value);
     }
-
 }

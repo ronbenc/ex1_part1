@@ -6,16 +6,6 @@
 
 #IncludeRegexTransform: 
 
-C:/home/ronbenc/projects/HW1/part1/map.c
-map.h
-C:/home/ronbenc/projects/HW1/part1/map.h
-assert.h
--
-stdlib.h
--
-stdio.h
--
-
 C:/home/ronbenc/projects/HW1/part1/map.h
 stdbool.h
 -

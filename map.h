@@ -187,10 +187,9 @@ MapResult mapClear(Map map);
 * Declares a new iterator for the loop.
 */
 #define MAP_FOREACH(iterator, map) \
-    Map tmp = map; \
-    for(char* iterator = (char*) mapGetFirst(tmp) ; \
+    for(char* iterator = (char*) mapGetFirst(map) ; \
         iterator ;\
-        tmp = tmp->next, iterator = mapGetNext(tmp))
+        iterator = mapGetNext(map))
 
 #endif /* MAP_H_ */
 

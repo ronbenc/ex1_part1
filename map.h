@@ -53,7 +53,7 @@ typedef enum MapResult_t {
 * 	NULL - if allocations failed.
 * 	A new Map in case of success.
 */
-Map mapCreate();
+Map mapCreate(); // implemented and self tested
 
 /**
 * mapDestroy: Deallocates an existing map. Clears all elements.
@@ -61,7 +61,7 @@ Map mapCreate();
 * @param map - Target map to be deallocated. If map is NULL nothing will be
 * 		done
 */
-void mapDestroy(Map map);
+void mapDestroy(Map map); //implemented and self tested
 
 /**
 * mapCopy: Creates a copy of target map.
@@ -72,7 +72,7 @@ void mapDestroy(Map map);
 * 	NULL if a NULL was sent or a memory allocation failed.
 * 	A Map containing the same elements as map otherwise.
 */
-Map mapCopy(Map map);
+Map mapCopy(Map map); //Itay - adjustments needed
 
 /**
 * mapGetSize: Returns the number of elements in a map
@@ -81,7 +81,7 @@ Map mapCopy(Map map);
 * 	-1 if a NULL pointer was sent.
 * 	Otherwise the number of elements in the map.
 */
-int mapGetSize(Map map);
+int mapGetSize(Map map); //Itay - adjustments needed
 
 /**
 * mapContains: Checks if a key element exists in the map. The key element will be
@@ -94,7 +94,7 @@ int mapGetSize(Map map);
 * 	false - if one or more of the inputs is null, or if the key element was not found.
 * 	true - if the key element was found in the map.
 */
-bool mapContains(Map map, const char* key);
+bool mapContains(Map map, const char* key); //Itay - adjustments needed
 
 /**
 *	mapPut: Gives a specified key a specific value.
@@ -111,7 +111,7 @@ bool mapContains(Map map, const char* key);
 * 	an element failed)
 * 	MAP_SUCCESS the paired elements had been inserted successfully
 */
-MapResult mapPut(Map map, const char* key, const char* data);
+MapResult mapPut(Map map, const char* key, const char* data); //adjustments needed for key exist part
 
 /**
 *	mapGet: Returns the data associated with a specific key in the map(not a copy).
@@ -124,7 +124,7 @@ we want to get.
 *  NULL if a NULL pointer was sent or if the map does not contain the requested key.
 * 	A pointer to the data element associated with the key otherwise.
 */
-char* mapGet(Map map, const char* key);
+char* mapGet(Map map, const char* key); // implemented and self tested 
 
 /**
 * 	mapRemove: Removes a pair of key and data elements from the map. The elements
@@ -142,7 +142,7 @@ char* mapGet(Map map, const char* key);
 *  MAP_ITEM_DOES_NOT_EXIST if an equal key item does not already exists in the map
 * 	MAP_SUCCESS the paired elements had been removed successfully
 */
-MapResult mapRemove(Map map, const char* key);
+MapResult mapRemove(Map map, const char* key); //Ron
 
 /**
 *	mapGetFirst: Sets the internal iterator (also called current key element) to
@@ -157,7 +157,7 @@ MapResult mapRemove(Map map, const char* key);
 * 	NULL if a NULL pointer was sent or the map is empty.
 * 	The first key element of the map otherwise
 */
-char* mapGetFirst(Map map);
+char* mapGetFirst(Map map); // implemented and self tested
 
 /**
 *	mapGetNext: Advances the map iterator to the next key element and returns it.
@@ -168,7 +168,7 @@ char* mapGetFirst(Map map);
 * 	or a NULL sent as argument
 * 	The next key element on the map in case of success
 */
-char* mapGetNext(Map map);
+char* mapGetNext(Map map); // implemented and self tested
 
 
 /**
@@ -180,12 +180,13 @@ char* mapGetNext(Map map);
 * 	MAP_NULL_ARGUMENT - if a NULL pointer was sent.
 * 	MAP_SUCCESS - Otherwise.
 */
-MapResult mapClear(Map map);
+MapResult mapClear(Map map); // implemented and self tested
 
 /*!
 * Macro for iterating over a map.
 * Declares a new iterator for the loop.
 */
+// implemented and self tested
 #define MAP_FOREACH(iterator, map) \
     for(char* iterator = (char*) mapGetFirst(map) ; \
         iterator ;\
@@ -193,4 +194,4 @@ MapResult mapClear(Map map);
 
 #endif /* MAP_H_ */
 
-void tmpMapPrint(Map map);
+void tmpMapPrint(Map map); //delete before submission

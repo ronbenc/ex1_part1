@@ -10,6 +10,9 @@ int main()
     mapPut(map, "111", "aaa");
     
     printf("%s\n", mapGet(map, "123"));
+    //Itay made a nonsubstantial edit
+    int i = 5;
+    
     return 0;
 }
 

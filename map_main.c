@@ -10,7 +10,7 @@ int main()
     mapPut(map, "111", "aaa");
     
     mapRemove(map, "111");
-    mapRemove(map, "111");
+    mapRemove(map, "456");
     tmpMapPrint(map);
 
     return 0;

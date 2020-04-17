@@ -119,31 +119,35 @@ MapResult mapRemove(Map map, const char* key)
     if(!map || !key)
         return MAP_NULL_ARGUMENT;
 
+    // Concern#1: search the key and update both map->current and previous_node
     Node previous_node = NULL;
 
-    MAP_FOREACH(key_iterator, map)
+    map->current = map->head;
+    while(map->current && strcmp(map->current->key, key))
     {
-        if(strcmp(key_iterator, key) == 0)
-        {
-            if(!previous_node) //remove head
-            {
-                assert(map->current == map->head);
-                map->head = map->head->next; //declare next head
-                assert(map->current != map->head);
-            }
-            else //remove node that is nod head
-            {
-                assert(previous_node != NULL && (map->current != map->head));
-                previous_node->next = map->current->next; //gap the nodes
-            }
-
-            nodeDestroy(map->current);
-            return MAP_SUCCESS;
-        }
         previous_node = map->current;
+        map->current = map->current->next;
     }
 
-    return MAP_ITEM_DOES_NOT_EXIST;
+    if(!map->current)
+        return MAP_ITEM_DOES_NOT_EXIST;
+
+    // Concern#2: handle special case of key found at the head of the list
+    if(previous_node)
+    {
+        assert(map->current != map->head);
+        previous_node->next = map->current->next;
+    } 
+    else
+    {
+        assert(map->current == map->head);
+        map->head = map->head->next;
+    }
+
+    // Concern #3: free the memory of the found node
+    nodeDestroy(map->current);
+
+    return MAP_SUCCESS;
 }
 
 char* mapGetFirst(Map map)

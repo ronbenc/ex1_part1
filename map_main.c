@@ -8,9 +8,8 @@ int main()
     mapPut(map, "456", "def");
     mapPut(map, "780", "ghi");
     mapPut(map, "111", "aaa");
-    
-    mapRemove(map, "111");
-    mapRemove(map, "456");
+    mapPut(map, "780", "asdfghjkk");
+
     tmpMapPrint(map);
 
     return 0;

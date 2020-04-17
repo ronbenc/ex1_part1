@@ -24,6 +24,22 @@ static char* copyString(const char* str)
     return strcpy(newStr, str);
 }
 
+//alocate a new node and assigns key adn value 
+static Node nodeCreate(const char* key, const char* value)
+{
+    Node new_node = malloc(sizeof(struct node)); //create new node
+    if(!new_node)
+        return NULL;
+
+    new_node->key = copyString(key);
+    new_node->value = copyString(value);
+
+    if(!new_node->key || !new_node->value)
+        return NULL;
+    
+    return new_node;
+}
+
 static void nodeDestroy(Node node)
 {
     assert(node);
@@ -61,37 +77,22 @@ MapResult mapPut(Map map, const char* key, const char* data)
     if(!map || !key || !data)
         return MAP_NULL_ARGUMENT;
 
-    char* newValue = copyString(data);
-    assert(newValue != NULL && strcmp(newValue, data) == 0);
-    /*
-    if(mapContains)// key exists 
+    char* curr_value = mapGet(map, key);
+    if(curr_value)
     {
-        MAP_FOREACH(iterator_key, map)
-        {
-            if(strcmp(key, iterator_key)==0)
-            {
-                free(mapGet(map, key));
-                mapGet(map, key) = newValue;
-                return MAP_SUCCESS;
-            }
-        }
+        free(curr_value);
+        curr_value = copyString(data);
+        if(!curr_value)
+            return MAP_OUT_OF_MEMORY;
+        return MAP_SUCCESS;
     }
-    */
+
     // key doesn't exist in list. we will add it to the head
-    Node new_node = malloc(sizeof(struct node)); //create new node
+    Node new_node = nodeCreate(key, data);
 
     if(!new_node)
-    {
-        return MAP_OUT_OF_MEMORY;
-    }
+    return MAP_OUT_OF_MEMORY;
 
-    char* newKey = copyString(key);
-    assert(newKey != NULL && strcmp(newKey, key) == 0);
-
-    // assuming the head of the list is an unpopulated node.
-    // populate the current head node and insert an unpopulated node in the head of the list.
-    new_node->key = newKey;
-    new_node->value = newValue;
     new_node->next = map->head;
     map->head = new_node;
 

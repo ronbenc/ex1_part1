@@ -10,7 +10,10 @@ int main()
     mapPut(map, "111", "aaa");
     mapPut(map, "780", "asdfghjkk");
 
-    tmpMapPrint(map);
+    MAP_FOREACH(iterator, map)
+    {
+        printf("%s\n", mapGet(map, "123"));
+    }
 
     return 0;
 }

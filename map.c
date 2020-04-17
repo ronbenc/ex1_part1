@@ -78,16 +78,17 @@ MapResult mapPut(Map map, const char* key, const char* data)
         return MAP_NULL_ARGUMENT;
 
     char* curr_value = mapGet(map, key);
-    if(curr_value)
+    if(curr_value) //key exists in the list. we will update its value;
     {
         free(curr_value);
         curr_value = copyString(data);
         if(!curr_value)
             return MAP_OUT_OF_MEMORY;
+
         return MAP_SUCCESS;
     }
 
-    // key doesn't exist in list. we will add it to the head
+    // key doesn't exists in list. we will add it to the head adn assign key and value
     Node new_node = nodeCreate(key, data);
 
     if(!new_node)
@@ -104,15 +105,18 @@ char* mapGet(Map map, const char* key)
     if(!map || !key)
         return NULL; 
 
-    MAP_FOREACH(key_iterator, map)
+    Node save_curr = map->current;
+    while(map->current && strcmp(map->current->key, key))
     {
-        if(strcmp(key_iterator, key)==0)
-        {
-            return map->current->value;
-        }       
+        map->current = map->current->next;
     }
+    
+    if(!map->current)
+        return NULL;
 
-    return NULL;   
+    char* value = map->current->value;
+    map->current = save_curr;
+    return value;   
 }
 
 MapResult mapRemove(Map map, const char* key)

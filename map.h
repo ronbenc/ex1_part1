@@ -111,7 +111,7 @@ bool mapContains(Map map, const char* key); //Itay - adjustments needed
 * 	an element failed)
 * 	MAP_SUCCESS the paired elements had been inserted successfully
 */
-MapResult mapPut(Map map, const char* key, const char* data); //adjustments needed for key exist part
+MapResult mapPut(Map map, const char* key, const char* data); // implemented and self tested
 
 /**
 *	mapGet: Returns the data associated with a specific key in the map(not a copy).
@@ -142,7 +142,7 @@ char* mapGet(Map map, const char* key); // implemented and self tested
 *  MAP_ITEM_DOES_NOT_EXIST if an equal key item does not already exists in the map
 * 	MAP_SUCCESS the paired elements had been removed successfully
 */
-MapResult mapRemove(Map map, const char* key); //Ron
+MapResult mapRemove(Map map, const char* key); // implemented and self tested
 
 /**
 *	mapGetFirst: Sets the internal iterator (also called current key element) to

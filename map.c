@@ -16,11 +16,20 @@ struct Map_t
     Node current;
 };
 
+//alocates a new string and copies given string data
 static char* copyString(const char* str)
 {
     char* newStr = malloc(strlen(str) + 1);
     if (newStr == NULL) return NULL;
     return strcpy(newStr, str);
+}
+
+static void nodeDestroy(Node node)
+{
+    assert(node);
+    free(node->key);
+    free(node->value);
+    free(node);
 }
 
 Map mapCreate()
@@ -105,7 +114,37 @@ char* mapGet(Map map, const char* key)
     return NULL;   
 }
 
-MapResult mapRemove(Map map, const char* key);
+MapResult mapRemove(Map map, const char* key)
+{
+    if(!map || !key)
+        return MAP_NULL_ARGUMENT;
+
+    Node previous_node = NULL;
+
+    MAP_FOREACH(key_iterator, map)
+    {
+        if(strcmp(key_iterator, key) == 0)
+        {
+            if(!previous_node) //remove head
+            {
+                assert(map->current == map->head);
+                map->head = map->head->next; //declare next head
+                assert(map->current != map->head);
+            }
+            else //remove node that is nod head
+            {
+                assert(previous_node != NULL && (map->current != map->head));
+                previous_node->next = map->current->next; //gap the nodes
+            }
+
+            nodeDestroy(map->current);
+            return MAP_SUCCESS;
+        }
+        previous_node = map->current;
+    }
+
+    return MAP_ITEM_DOES_NOT_EXIST;
+}
 
 char* mapGetFirst(Map map)
 {
@@ -134,17 +173,14 @@ MapResult mapClear(Map map)
     if(!map)
         return MAP_NULL_ARGUMENT;
 
-    while(map->head)
+    while (map->head)
     {
         Node tmp = map->head->next;
-        free(map->head->key);
-        free(map->head->value);
-        free(map->head);
+        nodeDestroy(map->head);
         map->head = tmp;
     }
-
-    map->current = NULL;
-
+    
+    map->head = NULL;
     return MAP_SUCCESS;
 }
 

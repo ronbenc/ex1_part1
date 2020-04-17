@@ -9,7 +9,10 @@ int main()
     mapPut(map, "780", "ghi");
     mapPut(map, "111", "aaa");
     
-    printf("%s\n", mapGet(map, "123"));
+    mapRemove(map, "111");
+    mapRemove(map, "111");
+    tmpMapPrint(map);
+
     return 0;
 }
 

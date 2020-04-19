@@ -72,7 +72,7 @@ void mapDestroy(Map map); //implemented and self tested
 * 	NULL if a NULL was sent or a memory allocation failed.
 * 	A Map containing the same elements as map otherwise.
 */
-Map mapCopy(Map map); //Itay - adjustments needed
+Map mapCopy(Map map); //implemented and self tested
 
 /**
 * mapGetSize: Returns the number of elements in a map
@@ -81,7 +81,7 @@ Map mapCopy(Map map); //Itay - adjustments needed
 * 	-1 if a NULL pointer was sent.
 * 	Otherwise the number of elements in the map.
 */
-int mapGetSize(Map map); //Itay - adjustments needed
+int mapGetSize(Map map); //implemented and self tested
 
 /**
 * mapContains: Checks if a key element exists in the map. The key element will be

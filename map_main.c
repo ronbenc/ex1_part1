@@ -6,14 +6,22 @@ int main()
     Map map = mapCreate();
     mapPut(map, "123", "abc");
     mapPut(map, "456", "def");
-    mapPut(map, "780", "ghi");
-    mapPut(map, "111", "aaa");
-    mapPut(map, "780", "asdfghjkk");
+    mapPut(map, "789", "ghi");
+    mapPut(map, "789", "asdfghjkk");
 
-    MAP_FOREACH(iterator, map)
+    mapRemove(map, "789");
+    if(mapContains(map, "789"))
     {
-        printf("%s\n", mapGet(map, "123"));
+        printf("contains");
     }
+    else
+    {
+        printf("not");
+    }
+    
+    
+    //mapDestroy(map);
+   // printf("%d\n", mapGetSize(map));
 
     return 0;
 }

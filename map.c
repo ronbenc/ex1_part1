@@ -68,9 +68,56 @@ void mapDestroy(Map map)
     free(map);
 }
 
-Map mapCopy(Map map);
-int mapGetSize(Map map);
-bool mapContains(Map map, const char* key);
+Map mapCopy(Map map)
+{
+    Map new_map = mapCreate();
+    if(new_map == NULL)
+        return NULL;
+    
+    MAP_FOREACH(key_iterator, map)
+    {
+        Node prev_head = new_map->head;
+        new_map->head = nodeCreate(map->current->key, map->current->value);     
+        if(new_map->head == NULL)
+            return NULL;
+
+        new_map->head->next = prev_head;
+    }
+    new_map->current = NULL;
+    return new_map;
+}
+
+int mapGetSize(Map map)
+{
+    if(map == NULL)
+        return -1;
+
+    Node save_curr = map->current;
+    int len=0;;
+    MAP_FOREACH(iterator, map)
+    {
+        len++;
+    }
+    map->current = save_curr;
+    return len;
+}
+
+bool mapContains(Map map, const char* key)
+{
+    Node save_curr = map->current;
+    bool flag = false;
+    MAP_FOREACH(key_iterator, map)
+    {
+        if(strcmp(key_iterator, key) == 0)
+        {
+            flag = true;
+            break; 
+        }
+    }
+    map->current = save_curr;
+    return flag;
+
+}
 
 MapResult mapPut(Map map, const char* key, const char* data)
 {
@@ -102,19 +149,20 @@ MapResult mapPut(Map map, const char* key, const char* data)
 
 char* mapGet(Map map, const char* key)
 {
-    if(!map || !key)
+    if(map == NULL || key == NULL)
         return NULL; 
 
     Node save_curr = map->current;
-    while(map->current && strcmp(map->current->key, key))
+    char* value = NULL;
+    MAP_FOREACH(key_iterator, map)
     {
-        map->current = map->current->next;
+        if(strcmp(key_iterator, key) == 0)
+        {
+            value = map->current->value;
+            break;
+        }
     }
-    
-    if(!map->current)
-        return NULL;
 
-    char* value = map->current->value;
     map->current = save_curr;
     return value;   
 }

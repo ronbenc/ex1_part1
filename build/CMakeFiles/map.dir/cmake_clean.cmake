@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/map.dir/map.c.obj"
-  "CMakeFiles/map.dir/map_main.c.obj"
+  "CMakeFiles/map.dir/strtostr_map_tester_matam_spring_2020.c.obj"
   "libmap.dll.a"
   "map.exe"
   "map.exe.manifest"

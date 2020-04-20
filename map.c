@@ -19,8 +19,12 @@ struct Map_t
 //alocates a new string and copies given string data
 static char* copyString(const char* str)
 {
-    char* newStr = malloc(strlen(str) + 1);
-    if (newStr == NULL) return NULL;
+    long int len = strlen(str);
+    char* newStr = malloc(len + 1);
+
+    if (newStr == NULL)
+        return NULL;
+
     return strcpy(newStr, str);
 }
 
@@ -28,13 +32,13 @@ static char* copyString(const char* str)
 static Node nodeCreate(const char* key, const char* value)
 {
     Node new_node = malloc(sizeof(struct node)); //create new node
-    if(!new_node)
+    if(new_node == NULL)
         return NULL;
 
     new_node->key = copyString(key);
     new_node->value = copyString(value);
 
-    if(!new_node->key || !new_node->value)
+    if(new_node->key == NULL || new_node->value == NULL)
         return NULL;
     
     return new_node;
@@ -48,10 +52,25 @@ static void nodeDestroy(Node node)
     free(node);
 }
 
+static Node mapGetNode(Map map, const char* key)
+{
+    Node current = map->head;
+
+    if(map == NULL)
+        return NULL;
+
+    while (current != NULL && strcmp(current->key, key) != 0)
+    {
+        current = current->next;
+    }
+
+    return current;
+}
+
 Map mapCreate()
 {
     Map map = malloc(sizeof(*map));
-    if(!map)
+    if(map == NULL)
     {
         return NULL;
     }
@@ -70,6 +89,9 @@ void mapDestroy(Map map)
 
 Map mapCopy(Map map)
 {
+    if(map == NULL)
+        return NULL;
+
     Map new_map = mapCreate();
     if(new_map == NULL)
         return NULL;
@@ -104,6 +126,8 @@ int mapGetSize(Map map)
 
 bool mapContains(Map map, const char* key)
 {
+    if(map == NULL || key == NULL)
+        return NULL;
     Node save_curr = map->current;
     bool flag = false;
     MAP_FOREACH(key_iterator, map)
@@ -121,24 +145,24 @@ bool mapContains(Map map, const char* key)
 
 MapResult mapPut(Map map, const char* key, const char* data)
 {
-    if(!map || !key || !data)
+    if(map == NULL || key == NULL || data == NULL)
         return MAP_NULL_ARGUMENT;
 
-    char* curr_value = mapGet(map, key);
-    if(curr_value) //key exists in the list. we will update its value;
+    Node ptr = mapGetNode(map, key);
+    if(ptr != NULL) //key exists in the list. we will update its value;
     {
-        free(curr_value);
-        curr_value = copyString(data);
-        if(!curr_value)
+        free(ptr->value);
+        ptr->value = copyString(data);
+        if(ptr->value == NULL)
             return MAP_OUT_OF_MEMORY;
-
+        
         return MAP_SUCCESS;
-    }
+   }
 
     // key doesn't exists in list. we will add it to the head adn assign key and value
     Node new_node = nodeCreate(key, data);
 
-    if(!new_node)
+    if(new_node == NULL)
     return MAP_OUT_OF_MEMORY;
 
     new_node->next = map->head;
@@ -169,24 +193,24 @@ char* mapGet(Map map, const char* key)
 
 MapResult mapRemove(Map map, const char* key)
 {
-    if(!map || !key)
+    if(map == NULL || key == NULL)
         return MAP_NULL_ARGUMENT;
 
     // Concern#1: search the key and update both map->current and previous_node
     Node previous_node = NULL;
 
     map->current = map->head;
-    while(map->current && strcmp(map->current->key, key))
+    while(map->current != NULL && strcmp(map->current->key, key) != 0)
     {
         previous_node = map->current;
         map->current = map->current->next;
     }
 
-    if(!map->current)
+    if(map->current == NULL)
         return MAP_ITEM_DOES_NOT_EXIST;
 
     // Concern#2: handle special case of key found at the head of the list
-    if(previous_node)
+    if(previous_node != NULL)
     {
         assert(map->current != map->head);
         previous_node->next = map->current->next;
@@ -205,7 +229,7 @@ MapResult mapRemove(Map map, const char* key)
 
 char* mapGetFirst(Map map)
 {
-    if(!map || !(map->head))
+    if(map == NULL || (map->head) == NULL)
         return NULL;
 
     // update current for the iterator
@@ -216,7 +240,7 @@ char* mapGetFirst(Map map)
 
 char* mapGetNext(Map map)
 {
-    if(!map || !(map->current) || !(map->current->next))
+    if(map == NULL || (map->current) == NULL || (map->current->next) == NULL)
         return NULL;
 
     // update current for the iterator
@@ -227,10 +251,10 @@ char* mapGetNext(Map map)
 
 MapResult mapClear(Map map)
 {
-    if(!map)
+    if(map == NULL)
         return MAP_NULL_ARGUMENT;
 
-    while (map->head)
+    while (map->head != NULL)
     {
         Node tmp = map->head->next;
         nodeDestroy(map->head);

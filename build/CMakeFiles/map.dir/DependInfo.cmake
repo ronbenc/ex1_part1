@@ -5,7 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
   "C:/home/ronbenc/projects/HW1/part1/map.c" "C:/home/ronbenc/projects/HW1/part1/build/CMakeFiles/map.dir/map.c.obj"
-  "C:/home/ronbenc/projects/HW1/part1/map_main.c" "C:/home/ronbenc/projects/HW1/part1/build/CMakeFiles/map.dir/map_main.c.obj"
+  "C:/home/ronbenc/projects/HW1/part1/strtostr_map_tester_matam_spring_2020.c" "C:/home/ronbenc/projects/HW1/part1/build/CMakeFiles/map.dir/strtostr_map_tester_matam_spring_2020.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

@@ -86,29 +86,29 @@ CMakeFiles/map.dir/map.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/map.dir/map.c.s"
 	C:\mingw-w64\x86_64-8.1.0-win32-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\home\ronbenc\projects\HW1\part1\map.c -o CMakeFiles\map.dir\map.c.s
 
-CMakeFiles/map.dir/map_main.c.obj: CMakeFiles/map.dir/flags.make
-CMakeFiles/map.dir/map_main.c.obj: ../map_main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\home\ronbenc\projects\HW1\part1\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/map.dir/map_main.c.obj"
-	C:\mingw-w64\x86_64-8.1.0-win32-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\map.dir\map_main.c.obj   -c C:\home\ronbenc\projects\HW1\part1\map_main.c
+CMakeFiles/map.dir/strtostr_map_tester_matam_spring_2020.c.obj: CMakeFiles/map.dir/flags.make
+CMakeFiles/map.dir/strtostr_map_tester_matam_spring_2020.c.obj: ../strtostr_map_tester_matam_spring_2020.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\home\ronbenc\projects\HW1\part1\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/map.dir/strtostr_map_tester_matam_spring_2020.c.obj"
+	C:\mingw-w64\x86_64-8.1.0-win32-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\map.dir\strtostr_map_tester_matam_spring_2020.c.obj   -c C:\home\ronbenc\projects\HW1\part1\strtostr_map_tester_matam_spring_2020.c
 
-CMakeFiles/map.dir/map_main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/map.dir/map_main.c.i"
-	C:\mingw-w64\x86_64-8.1.0-win32-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\home\ronbenc\projects\HW1\part1\map_main.c > CMakeFiles\map.dir\map_main.c.i
+CMakeFiles/map.dir/strtostr_map_tester_matam_spring_2020.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/map.dir/strtostr_map_tester_matam_spring_2020.c.i"
+	C:\mingw-w64\x86_64-8.1.0-win32-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\home\ronbenc\projects\HW1\part1\strtostr_map_tester_matam_spring_2020.c > CMakeFiles\map.dir\strtostr_map_tester_matam_spring_2020.c.i
 
-CMakeFiles/map.dir/map_main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/map.dir/map_main.c.s"
-	C:\mingw-w64\x86_64-8.1.0-win32-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\home\ronbenc\projects\HW1\part1\map_main.c -o CMakeFiles\map.dir\map_main.c.s
+CMakeFiles/map.dir/strtostr_map_tester_matam_spring_2020.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/map.dir/strtostr_map_tester_matam_spring_2020.c.s"
+	C:\mingw-w64\x86_64-8.1.0-win32-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\home\ronbenc\projects\HW1\part1\strtostr_map_tester_matam_spring_2020.c -o CMakeFiles\map.dir\strtostr_map_tester_matam_spring_2020.c.s
 
 # Object files for target map
 map_OBJECTS = \
 "CMakeFiles/map.dir/map.c.obj" \
-"CMakeFiles/map.dir/map_main.c.obj"
+"CMakeFiles/map.dir/strtostr_map_tester_matam_spring_2020.c.obj"
 
 # External object files for target map
 map_EXTERNAL_OBJECTS =
 
 map.exe: CMakeFiles/map.dir/map.c.obj
-map.exe: CMakeFiles/map.dir/map_main.c.obj
+map.exe: CMakeFiles/map.dir/strtostr_map_tester_matam_spring_2020.c.obj
 map.exe: CMakeFiles/map.dir/build.make
 map.exe: CMakeFiles/map.dir/linklibs.rsp
 map.exe: CMakeFiles/map.dir/objects1.rsp

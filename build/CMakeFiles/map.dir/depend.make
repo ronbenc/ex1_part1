@@ -4,6 +4,7 @@
 CMakeFiles/map.dir/map.c.obj: ../map.c
 CMakeFiles/map.dir/map.c.obj: ../map.h
 
-CMakeFiles/map.dir/map_main.c.obj: ../map.h
-CMakeFiles/map.dir/map_main.c.obj: ../map_main.c
+CMakeFiles/map.dir/strtostr_map_tester_matam_spring_2020.c.obj: ../map.h
+CMakeFiles/map.dir/strtostr_map_tester_matam_spring_2020.c.obj: ../strtostr_map_tester_matam_spring_2020.c
+CMakeFiles/map.dir/strtostr_map_tester_matam_spring_2020.c.obj: ../test_utilities.h
 

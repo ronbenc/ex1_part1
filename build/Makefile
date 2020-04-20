@@ -166,32 +166,32 @@ map.c.s:
 	$(MAKE) -f CMakeFiles\map.dir\build.make CMakeFiles/map.dir/map.c.s
 .PHONY : map.c.s
 
-map_main.obj: map_main.c.obj
+strtostr_map_tester_matam_spring_2020.obj: strtostr_map_tester_matam_spring_2020.c.obj
 
-.PHONY : map_main.obj
+.PHONY : strtostr_map_tester_matam_spring_2020.obj
 
 # target to build an object file
-map_main.c.obj:
-	$(MAKE) -f CMakeFiles\map.dir\build.make CMakeFiles/map.dir/map_main.c.obj
-.PHONY : map_main.c.obj
+strtostr_map_tester_matam_spring_2020.c.obj:
+	$(MAKE) -f CMakeFiles\map.dir\build.make CMakeFiles/map.dir/strtostr_map_tester_matam_spring_2020.c.obj
+.PHONY : strtostr_map_tester_matam_spring_2020.c.obj
 
-map_main.i: map_main.c.i
+strtostr_map_tester_matam_spring_2020.i: strtostr_map_tester_matam_spring_2020.c.i
 
-.PHONY : map_main.i
+.PHONY : strtostr_map_tester_matam_spring_2020.i
 
 # target to preprocess a source file
-map_main.c.i:
-	$(MAKE) -f CMakeFiles\map.dir\build.make CMakeFiles/map.dir/map_main.c.i
-.PHONY : map_main.c.i
+strtostr_map_tester_matam_spring_2020.c.i:
+	$(MAKE) -f CMakeFiles\map.dir\build.make CMakeFiles/map.dir/strtostr_map_tester_matam_spring_2020.c.i
+.PHONY : strtostr_map_tester_matam_spring_2020.c.i
 
-map_main.s: map_main.c.s
+strtostr_map_tester_matam_spring_2020.s: strtostr_map_tester_matam_spring_2020.c.s
 
-.PHONY : map_main.s
+.PHONY : strtostr_map_tester_matam_spring_2020.s
 
 # target to generate assembly for a file
-map_main.c.s:
-	$(MAKE) -f CMakeFiles\map.dir\build.make CMakeFiles/map.dir/map_main.c.s
-.PHONY : map_main.c.s
+strtostr_map_tester_matam_spring_2020.c.s:
+	$(MAKE) -f CMakeFiles\map.dir\build.make CMakeFiles/map.dir/strtostr_map_tester_matam_spring_2020.c.s
+.PHONY : strtostr_map_tester_matam_spring_2020.c.s
 
 # Help Target
 help:
@@ -205,9 +205,9 @@ help:
 	@echo ... map.obj
 	@echo ... map.i
 	@echo ... map.s
-	@echo ... map_main.obj
-	@echo ... map_main.i
-	@echo ... map_main.s
+	@echo ... strtostr_map_tester_matam_spring_2020.obj
+	@echo ... strtostr_map_tester_matam_spring_2020.i
+	@echo ... strtostr_map_tester_matam_spring_2020.s
 .PHONY : help
 
 

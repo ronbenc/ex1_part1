@@ -16,7 +16,7 @@ struct Map_t
     Node current;
 };
 
-//alocates a new string and copies given string data
+//allocates a new string and copies given string data
 static char* copyString(const char* str)
 {
     long int len = strlen(str);
@@ -28,7 +28,7 @@ static char* copyString(const char* str)
     return strcpy(newStr, str);
 }
 
-//alocate a new node and assigns key adn value 
+//allocates a new node and assigns key and value 
 static Node nodeCreate(const char* key, const char* value)
 {
     Node new_node = malloc(sizeof(struct node)); //create new node
@@ -96,6 +96,7 @@ Map mapCopy(Map map)
     if(new_map == NULL)
         return NULL;
     
+
     MAP_FOREACH(key_iterator, map)
     {
         Node prev_head = new_map->head;
@@ -128,19 +129,38 @@ bool mapContains(Map map, const char* key)
 {
     if(map == NULL || key == NULL)
         return NULL;
-    Node save_curr = map->current;
-    bool flag = false;
-    MAP_FOREACH(key_iterator, map)
+    
+    if(mapGetNode(map, key) != NULL)
+        return true;
+    else
     {
-        if(strcmp(key_iterator, key) == 0)
-        {
-            flag = true;
-            break; 
-        }
+        return false;
     }
-    map->current = save_curr;
-    return flag;
+}
 
+//Reassign a value for a certain node
+static MapResult mapPutReassign(Node ptr, const char* data)
+{
+    free(ptr->value);
+    ptr->value = copyString(data);
+    if(ptr->value == NULL)
+        return MAP_OUT_OF_MEMORY;
+    
+    return MAP_SUCCESS;
+}
+
+//Assign a value for a certain node
+static MapResult mapPutAssign(Map map, const char* key, const char* data)
+{
+    Node new_node = nodeCreate(key, data);
+
+    if(new_node == NULL)
+        return MAP_OUT_OF_MEMORY;
+
+    new_node->next = map->head;
+    map->head = new_node;
+
+    return MAP_SUCCESS;
 }
 
 MapResult mapPut(Map map, const char* key, const char* data)
@@ -151,24 +171,11 @@ MapResult mapPut(Map map, const char* key, const char* data)
     Node ptr = mapGetNode(map, key);
     if(ptr != NULL) //key exists in the list. we will update its value;
     {
-        free(ptr->value);
-        ptr->value = copyString(data);
-        if(ptr->value == NULL)
-            return MAP_OUT_OF_MEMORY;
-        
-        return MAP_SUCCESS;
-   }
+        return mapPutReassign(ptr, data);
+    }
 
     // key doesn't exists in list. we will add it to the head adn assign key and value
-    Node new_node = nodeCreate(key, data);
-
-    if(new_node == NULL)
-    return MAP_OUT_OF_MEMORY;
-
-    new_node->next = map->head;
-    map->head = new_node;
-
-    return MAP_SUCCESS;
+    return mapPutAssign(map, key, data);
 }
 
 char* mapGet(Map map, const char* key)
@@ -176,19 +183,11 @@ char* mapGet(Map map, const char* key)
     if(map == NULL || key == NULL)
         return NULL; 
 
-    Node save_curr = map->current;
-    char* value = NULL;
-    MAP_FOREACH(key_iterator, map)
-    {
-        if(strcmp(key_iterator, key) == 0)
-        {
-            value = map->current->value;
-            break;
-        }
-    }
-
-    map->current = save_curr;
-    return value;   
+    Node node = mapGetNode(map, key);
+    if(node == NULL)
+        return NULL;
+    
+    return(node->value);
 }
 
 MapResult mapRemove(Map map, const char* key)
@@ -263,12 +262,4 @@ MapResult mapClear(Map map)
     
     map->head = NULL;
     return MAP_SUCCESS;
-}
-
-void tmpMapPrint(Map map)
-{
-    MAP_FOREACH(key_iterator, map)
-    {
-        printf("%s, %s\n", key_iterator, map->current->value);
-    }
 }

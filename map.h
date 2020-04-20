@@ -193,5 +193,3 @@ MapResult mapClear(Map map); // implemented and self tested
         iterator = mapGetNext(map))
 
 #endif /* MAP_H_ */
-
-void tmpMapPrint(Map map); //delete before submission

@@ -6,29 +6,19 @@
 
 #IncludeRegexTransform: 
 
+C:/home/ronbenc/projects/HW1/part1/map.c
+map.h
 C:/home/ronbenc/projects/HW1/part1/map.h
-stdbool.h
--
-string.h
--
-
-C:/home/ronbenc/projects/HW1/part1/strtostr_map_tester_matam_spring_2020.c
-stdio.h
+assert.h
 -
 stdlib.h
 -
-string.h
+stdio.h
 -
-time.h
--
-test_utilities.h
-C:/home/ronbenc/projects/HW1/part1/test_utilities.h
-map.h
-C:/home/ronbenc/projects/HW1/part1/map.h
 
-C:/home/ronbenc/projects/HW1/part1/test_utilities.h
+C:/home/ronbenc/projects/HW1/part1/map.h
 stdbool.h
 -
-stdio.h
+string.h
 -
 

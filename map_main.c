@@ -10,19 +10,15 @@ int main()
     mapPut(map, "789", "asdfghjkk");
 
     mapRemove(map, "789");
-    if(mapContains(map, "789"))
-    {
-        printf("contains");
-    }
-    else
-    {
-        printf("not");
-    }
-    
-    
-    //mapDestroy(map);
-   // printf("%d\n", mapGetSize(map));
+    printf("%d\n", mapGetSize(map));
+    mapClear(map);
+    printf("%d\n", mapGetSize(map)); 
 
+    mapDestroy(map);
+    map = NULL;
+
+    printf("%d\n", mapGetSize(map));
+    
     return 0;
 }
 

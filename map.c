@@ -91,7 +91,7 @@ int mapGetSize(Map map)
 {
     if(map == NULL)
         return -1;
-
+    
     Node save_curr = map->current;
     int len=0;;
     MAP_FOREACH(iterator, map)

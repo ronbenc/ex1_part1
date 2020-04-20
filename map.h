@@ -94,7 +94,7 @@ int mapGetSize(Map map); //implemented and self tested
 * 	false - if one or more of the inputs is null, or if the key element was not found.
 * 	true - if the key element was found in the map.
 */
-bool mapContains(Map map, const char* key); //Itay - adjustments needed
+bool mapContains(Map map, const char* key); //implemented and self tested. need to check outpud after mapDestroy
 
 /**
 *	mapPut: Gives a specified key a specific value.

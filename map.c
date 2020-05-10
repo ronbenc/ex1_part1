@@ -16,6 +16,7 @@ struct Map_t
     Node current;
 };
 
+//developers comment: this function exists in election.c aswell. we chose to duplicate it because it's a simple and short function that doesn"t justify a utilty file
 //allocates a new string and copies given string data
 static char* copyString(const char* str)
 {
